@@ -1,0 +1,1 @@
+Home media center project, based on Rasberry Pi.
