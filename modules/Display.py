@@ -22,7 +22,7 @@ class Display():
   direction = 0
   lightColor = (200,200,200)
   darkColor = (100,100,100)
-  currentColor = lightColor
+  currentColor = darkColor
 
   def __init__(self, state, weather):
     self.state = state
