@@ -22,21 +22,14 @@ class Display():
   direction = 0
   lightColor = (200,200,200)
   darkColor = (100,100,100)
-  currnetColor = lightColor
+  currentColor = lightColor
 
   def __init__(self, state, weather):
     self.state = state
     self.weather = weather
 
-
-  def checkSunrise(self):
-    if (self.weather.updatedAt > 0):
-      if (time.time() <= self.weather.currentWeather['current']['sunrise'] or time.time() > self.weather.currentWeather['current']['sunset']):
-        self.currnetColor = self.darkColor
-
   def render(self):    
    while True:
-      self.checkSunrise()
       image = Image.new('RGB', (self.width, self.width))
       draw = ImageDraw.Draw(image)		
       self.drawTemperature(draw)
@@ -44,7 +37,7 @@ class Display():
         self.playerScreen(draw)
         self.drawHumidity(draw,0)
       else:
-        self.standByScreen(draw)
+        self.drawBigClock(draw)
         self.drawUV(draw)
         self.drawHumidity(draw,1)
       image.paste(image, (0, 0))
@@ -53,15 +46,15 @@ class Display():
       time.sleep(0.03)
 
 
-  def standByScreen(self, draw):
-    draw.text((0,2), datetime.now().strftime("%H:%M"), font=self.fontBig, fill=self.currnetColor)
+  def drawBigClock(self, draw):
+    draw.text((0,2), datetime.now().strftime("%H:%M"), font=self.fontBig, fill=self.currentColor)
 
 
   def drawTemperature(self, draw):
     if (self.weather.updatedAt > 0):
       temp = "+{:2.1f}".format(self.weather.getCurrentTemp())
       tempWidth, tempHeight = draw.textsize(temp, font=self.fontMedium)
-      draw.text((self.width - tempWidth,0), temp, font=self.fontMedium, fill=self.currnetColor)
+      draw.text((self.width - tempWidth,0), temp, font=self.fontMedium, fill=self.currentColor)
     else:
       print('weather not loaded yet...')
 
@@ -75,7 +68,7 @@ class Display():
       else:
         font = self.fontMedium
         coord = (100, 0)
-      draw.text(coord, temp, font=font, fill=self.currnetColor)
+      draw.text(coord, temp, font=font, fill=self.currentColor)
     else:
       print('weather not loaded yet...')
 
@@ -84,13 +77,13 @@ class Display():
       uv = "{:0.0f}".format(self.weather.getCurrentUV())
       width, height = draw.textsize(uv, font=self.fontSmall)
       coord = (170, 40)
-      draw.text(coord, uv, font=self.fontSmall, fill=self.currnetColor)
+      draw.text(coord, uv, font=self.fontSmall, fill=self.currentColor)
     else:
       print('weather not loaded yet...')
 
 
   def playerScreen(self, draw):
-    draw.text((0,0), datetime.now().strftime("%H:%M"), font=self.fontMedium, fill=self.currnetColor)
+    draw.text((0,0), datetime.now().strftime("%H:%M"), font=self.fontMedium, fill=self.currentColor)
     nowPlayng = self.state.currentState['artist'] + ': ' + self.state.currentState['title']
 
     ArtistWidth, ArtistHeight = draw.textsize(nowPlayng, font=self.fontMedium)
@@ -112,7 +105,7 @@ class Display():
       self.scrollPosition = 0
       self.direction = 0
 
-    draw.text((-self.scrollPosition,32), nowPlayng, font=self.fontMedium, fill=self.currnetColor)
+    draw.text((-self.scrollPosition,32), nowPlayng, font=self.fontMedium, fill=self.currentColor)
 
 
 

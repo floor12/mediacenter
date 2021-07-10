@@ -1,5 +1,6 @@
 
 import time
+import yaml
 from threading import Thread
 from modules.Weather import *
 from modules.WeatherProvider import *
@@ -9,12 +10,17 @@ from modules.Display import *
 from modules.PowerController import *
 
 
+with open(r'config.yaml') as file:
+    config_list = yaml.load(file, Loader=yaml.FullLoader)
+
+openWeatherToken = config_list['openWeatherApi']
+openWeatherCityID = config_list['openWeatherCityID']
 state = VolumioState();
 weather = Weather();
 oledDisplay = Display(state, weather);
 volumioStateProvider = VolumioStateProvider(state)
 powerController = PowerController(state)
-WeatherProvider = WeatherProvider(weather)
+WeatherProvider = WeatherProvider(weather,openWeatherToken,openWeatherCityID)
 
 def displayThread():
 	oledDisplay.render()

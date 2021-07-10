@@ -18,7 +18,6 @@ class VolumioStateProvider():
 
   def onPushState(self, data):
     print('new state received')
-    print(data)
     self.state.currentState = data
  
 

@@ -15,9 +15,7 @@ class PowerController():
       if ('service' in self.state.currentState):
         if (self.state.currentState['service'] == 'volspotconnect2'):
           GPIO.output(27, GPIO.HIGH)
-          print('power')
         else:
           GPIO.output(27, GPIO.LOW)
-          print('no power')
       time.sleep(1)
 
