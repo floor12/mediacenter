@@ -1,9 +1,8 @@
+class VolumioState:
+    current_state = {'status': 'stop'}
 
-class VolumioState():
-  currentState = {'status':'stop'}
-
-  def isPlaying(self):
-    if (self.currentState['status'] == 'play'):
-      return True
-    else:
-       return False
+    def is_playing(self):
+        if self.current_state['status'] == 'play':
+            return True
+        else:
+            return False
