@@ -1,1 +1,4 @@
-Home media center project, based on Rasberry Pi.
+# SLAVIK
+## The home network streamer
+
+Python software to play music from RaspberryPi with some features.
