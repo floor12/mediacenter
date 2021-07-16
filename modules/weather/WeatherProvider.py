@@ -26,8 +26,7 @@ class WeatherProvider:
         }
         try:
             api_response = requests.get(url=self.apiUrl, params=request_params)
-            self.weather.current_weather = api_response.json()
-            self.weather.updated_at = time.time()
+            self.weather.set_new_data(api_response.json())
             print('weather updated')
         except requests.exceptions.RequestException:
             print('weather loading problem...')

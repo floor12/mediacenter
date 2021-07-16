@@ -55,7 +55,7 @@ class Display:
         draw.text((0, 2), datetime.now().strftime("%H:%M"), font=self.fontBig, fill=self.current_color)
 
     def draw_temperature(self, draw):
-        if self.weather.updated_at > 0:
+        if self.weather.has_data():
             temp = "+{:2.1f}".format(self.weather.get_current_temp())
             temp_width, temp_height = draw.textsize(temp, font=self.font_medium)
             draw.text((self.width - temp_width, 0), temp, font=self.font_medium, fill=self.current_color)
@@ -63,7 +63,7 @@ class Display:
             print('weather not loaded yet...')
 
     def draw_humidity(self, draw, row):
-        if self.weather.updated_at > 0:
+        if self.weather.has_data():
             temp = "{}%".format(self.weather.get_current_hum())
             temp_width, temp_height = draw.textsize(temp, font=self.fontSmall)
             if row == 1:
@@ -77,7 +77,7 @@ class Display:
             print('weather not loaded yet...')
 
     def draw_uv(self, draw):
-        if self.weather.updated_at > 0:
+        if self.weather.has_data():
             uv = "{:0.0f}".format(self.weather.get_current_uv())
             coord = (170, 40)
             draw.text(coord, uv, font=self.fontSmall, fill=self.current_color)

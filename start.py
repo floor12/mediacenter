@@ -1,8 +1,8 @@
 import yaml
 from threading import Thread
 
-from modules.Weather import Weather
-from modules.WeatherProvider import *
+from modules.weather.Weather import *
+from modules.weather.WeatherProvider import *
 from modules.ButtonProvider import *
 from modules.VolumioStateProvider import *
 from modules.State import *
