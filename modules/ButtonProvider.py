@@ -13,7 +13,7 @@ class ButtonProvider:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.PIN_TURNTABLE_POWER, GPIO.IN)
 
-    def listener(self):
+    def start_listener(self):
         while True:
             self.read_turntable_button()
             time.sleep(1)

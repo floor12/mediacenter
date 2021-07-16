@@ -19,7 +19,7 @@ class VolumioStateProvider:
         print('new state received')
         self.state.set_state(data)
 
-    def wait(self):
+    def start_listener(self):
         print('wait')
         self.volumioIO.wait()
         while True:

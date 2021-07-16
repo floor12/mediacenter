@@ -1,2 +1,3 @@
 openWeatherApi: "access_token"
-openWeatherCityID: "some_id"
+openWeatherLon: -0.3774
+openWeatherLat: 39.4697

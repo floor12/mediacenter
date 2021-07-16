@@ -15,7 +15,7 @@ class PowerController:
         GPIO.setup(self.PIN_TURNTABLE, GPIO.OUT)
         self.state = state
 
-    def check_playing_state(self):
+    def start_listener(self):
         time.sleep(2)
         while True:
             self.check_volumio_state()
