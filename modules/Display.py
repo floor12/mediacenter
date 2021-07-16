@@ -32,13 +32,20 @@ class Display:
             image = Image.new('RGB', (self.width, self.width))
             draw = ImageDraw.Draw(image)
             self.draw_temperature(draw)
-            if self.state.is_playing():
-                self.player_screen(draw)
+
+            if self.state.get_playing_mode() == self.state.MODE_DIGITAL:
+                self.draw_current_track(draw)
+                self.draw_small_clock(draw)
                 self.draw_humidity(draw, 0)
             else:
-                self.draw_big_clock(draw)
-                self.draw_uv(draw)
-                self.draw_humidity(draw, 1)
+                if self.state.get_playing_mode() == self.state.MODE_TURNTABLE:
+                    self.draw_turntable(draw)
+                    self.draw_small_clock(draw)
+                    self.draw_humidity(draw, 0)
+                else:
+                    self.draw_big_clock(draw)
+                    self.draw_uv(draw)
+                    self.draw_humidity(draw, 1)
             image.paste(image, (0, 0))
             cimg = image.crop((0, 0, self.width, self.height))
             self.oled.display(cimg)
@@ -77,9 +84,8 @@ class Display:
         else:
             print('weather not loaded yet...')
 
-    def player_screen(self, draw):
-        draw.text((0, 0), datetime.now().strftime("%H:%M"), font=self.font_medium, fill=self.current_color)
-        now_playing = self.state.current_state['artist'] + ': ' + self.state.current_state['title']
+    def draw_current_track(self, draw):
+        now_playing = self.state.volumio_state['artist'] + ': ' + self.state.volumio_state['title']
 
         artist_width, artist_height = draw.textsize(now_playing, font=self.font_medium)
         if artist_width > self.width:
@@ -101,3 +107,9 @@ class Display:
             self.direction = 0
 
         draw.text((-self.scrollPosition, 32), now_playing, font=self.font_medium, fill=self.current_color)
+
+    def draw_small_clock(self, draw):
+        draw.text((0, 0), datetime.now().strftime("%H:%M"), font=self.font_medium, fill=self.current_color)
+
+    def draw_turntable(self, draw):
+        draw.text((30, 32), 'Вертушка', font=self.font_medium, fill=self.current_color)

@@ -17,7 +17,7 @@ class VolumioStateProvider:
 
     def on_push_state(self, data):
         print('new state received')
-        self.state.current_state = data
+        self.state.set_state(data)
 
     def wait(self):
         print('wait')
