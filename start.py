@@ -3,7 +3,7 @@ from threading import Thread
 
 from modules.weather.Weather import *
 from modules.weather.WeatherProvider import *
-from modules.ButtonProvider import *
+from modules.KeyboardProvider import *
 from modules.VolumioStateProvider import *
 from modules.State import *
 from modules.Display import *
@@ -23,7 +23,7 @@ volumioStateProvider = VolumioStateProvider(state)
 powerController = PowerController(state)
 ultradriveController = UltradriveController(state)
 WeatherProvider = WeatherProvider(weather, openWeatherToken, openWeatherLon, openWeatherLat)
-ButtonProvider = ButtonProvider(state)
+KeyboardProvider = KeyboardProvider(volumioStateProvider)
 
 
 def display_thread():
@@ -58,17 +58,18 @@ weather_thread = Thread(target=weather_thread)
 weather_thread.start()
 
 
-def buttons_thread():
-    ButtonProvider.start_listener()
-
-
-buttons_thread = Thread(target=buttons_thread)
-buttons_thread.start()
-
-
 def ultradrive_thread():
     ultradriveController.control_device()
 
 
 ultradrive_thread = Thread(target=ultradrive_thread)
 ultradrive_thread.start()
+
+# !!! GPIO buttons thread is disabled  !!!
+#
+# def buttons_thread():
+#     ButtonProvider.start_listener()
+#
+#
+# buttons_thread = Thread(target=buttons_thread)
+# buttons_thread.start()

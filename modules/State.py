@@ -28,7 +28,5 @@ class State:
             return self.MODE_DIGITAL
         if self.last_digital_active + self.IDLE_PERIOD >= time.time() and 'service' in self.volumio_state and \
                 self.volumio_state['service'] == 'volspotconnect2':
-            print('amp will shut down in...')
-            print(time.time() - self.last_digital_active - self.IDLE_PERIOD)
             return self.MODE_DIGITAL
         return self.MODE_IDLE

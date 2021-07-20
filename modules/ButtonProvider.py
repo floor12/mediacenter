@@ -6,8 +6,6 @@ import RPi.GPIO as GPIO
 class ButtonProvider:
     PIN_TURNTABLE_POWER = 4
 
-    is_playing = False
-
     def __init__(self, state):
         self.state = state
         GPIO.setmode(GPIO.BCM)

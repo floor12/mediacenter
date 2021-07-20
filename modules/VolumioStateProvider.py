@@ -20,8 +20,33 @@ class VolumioStateProvider:
         self.state.set_state(data)
 
     def start_listener(self):
-        print('wait')
         self.volumioIO.wait()
         while True:
-            print('cycle1')
             time.sleep(1)
+
+    def toggle_play(self):
+        if 'status' in self.state.volumio_state and self.state.volumio_state['status'] == 'play':
+            self.volumioIO.emit('pause')
+            print('pause emited')
+            time.sleep(1)
+            self.volumioIO.emit('getState')
+        else:
+            self.volumioIO.emit('play')
+            print('play emited')
+            time.sleep(1)
+            self.volumioIO.emit('getState')
+
+    def next(self):
+        self.volumioIO.emit('next')
+        print('next emited')
+
+    def prev(self):
+        self.volumioIO.emit('prev')
+        print('prev emited')
+
+    def stop(self):
+        self.volumioIO.emit('stop')
+        print('stop emited')
+        time.sleep(1)
+        self.volumioIO.emit('getState')
+
