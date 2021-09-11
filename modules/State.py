@@ -27,6 +27,6 @@ class State:
         if self.is_digital_active:
             return self.MODE_DIGITAL
         if self.last_digital_active + self.IDLE_PERIOD >= time.time() and 'service' in self.volumio_state and \
-                self.volumio_state['service'] == 'volspotconnect2':
+                (self.volumio_state['service'] == 'volspotconnect2' or self.volumio_state['service'] == 'airplay_emulation'):
             return self.MODE_DIGITAL
         return self.MODE_IDLE
