@@ -26,6 +26,19 @@ class UltradriveController:
             0
         )
 
+        # set input volume
+        self.ultradrive.set_value(
+            self.ultradrive.channels['inputB'],
+            self.ultradrive.commands['in_out']['gain'],
+            self.ultradrive.convert_db(-3)
+        )
+
+        self.ultradrive.set_value(
+            self.ultradrive.channels['inputC'],
+            self.ultradrive.commands['in_out']['gain'],
+            self.ultradrive.convert_db(-3)
+        )
+
         # switch inputs
         self.ultradrive.set_value(
             self.ultradrive.channels['output1'],
@@ -65,6 +78,19 @@ class UltradriveController:
             self.ultradrive.channels['channelSetup'],
             self.ultradrive.commands['setup']['ono_ff'],
             1
+        )
+
+        # set input volume
+        self.ultradrive.set_value(
+            self.ultradrive.channels['inputB'],
+            self.ultradrive.commands['in_out']['gain'],
+            self.ultradrive.convert_db(-7)
+        )
+
+        self.ultradrive.set_value(
+            self.ultradrive.channels['inputC'],
+            self.ultradrive.commands['in_out']['gain'],
+            self.ultradrive.convert_db(-7)
         )
 
         # switch inputs
