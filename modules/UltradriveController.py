@@ -84,13 +84,13 @@ class UltradriveController:
         self.ultradrive.set_value(
             self.ultradrive.channels['inputB'],
             self.ultradrive.commands['in_out']['gain'],
-            self.ultradrive.convert_db(-7)
+            self.ultradrive.convert_db(-13)
         )
 
         self.ultradrive.set_value(
             self.ultradrive.channels['inputC'],
             self.ultradrive.commands['in_out']['gain'],
-            self.ultradrive.convert_db(-7)
+            self.ultradrive.convert_db(-13)
         )
 
         # switch inputs

@@ -7,7 +7,7 @@ from modules.KeyboardProvider import *
 from modules.VolumioStateProvider import *
 from modules.State import *
 from modules.Display import *
-from modules.PowerController import *
+from modules.WifiPowerController import *
 from modules.UltradriveController import *
 
 with open(r'config.yaml') as file:
@@ -20,7 +20,7 @@ state = State()
 weather = Weather()
 oledDisplay = Display(state, weather)
 volumioStateProvider = VolumioStateProvider(state)
-powerController = PowerController(state)
+powerController = WifiPowerController(state)
 ultradriveController = UltradriveController(state)
 WeatherProvider = WeatherProvider(weather, openWeatherToken, openWeatherLon, openWeatherLat)
 KeyboardProvider = KeyboardProvider(volumioStateProvider)

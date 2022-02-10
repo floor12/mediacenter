@@ -19,7 +19,7 @@ class Display:
     fontSmall = ImageFont.truetype("fonts/Comfortaa-VariableFont_wght.ttf", 25)
     scrollPosition = 0
     direction = 0
-    lightColor = (200, 200, 200)
+    lightColor = (255, 255, 255)
     darkColor = (100, 100, 100)
     current_color = darkColor
 
